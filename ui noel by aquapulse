@@ -1,3 +1,5 @@
+print("[DEBUG] Démarrage du script UI AquaPulse...")
+
 -- Custom made by ssennex.
 -- Skid what are you doing here bro
 
@@ -35,17 +37,19 @@ local Library = {
 },
 
 -- Activer automatiquement le thème de Noël en décembre
+SelectedTheme = "Default"
+
+-- Activer automatiquement le thème de Noël en décembre
 local currentMonth = os.date("*t").month
 print("[DEBUG] Mois actuel détecté:", currentMonth)
 if currentMonth == 12 then
     print("[DEBUG] Décembre détecté - Activation du thème de Noël")
-    Library.SelectedTheme = "Christmas"
+    SelectedTheme = "Christmas"
 else
     print("[DEBUG] Nous ne sommes pas en décembre - Thème par défaut")
 end
-print("[DEBUG] Thème sélectionné après vérification du mois:", Library.SelectedTheme)
-SelectedTheme = "Default",
-print("[DEBUG] Thème après affectation de SelectedTheme:", Library.SelectedTheme)
+print("[DEBUG] Thème sélectionné après vérification du mois:", SelectedTheme)
+Library.SelectedTheme = SelectedTheme
 	Folder = nil,
 	SaveCfg = false,
 	Font = Enum.Font.Gotham
@@ -1863,6 +1867,8 @@ MakeResizable(ResizeBtn, MainWindow, Vector2.new(400, 250), Vector2.new(1200, 80
 				}), "Text")
 			})
 		end
+		print("[DEBUG] Application du thème dans MakeWindow (fin de fonction):", Library.SelectedTheme)
+		SetTheme()
 		return ElementFunction   
 	end  
 	
