@@ -36,9 +36,13 @@ local Library = {
 
 -- Activer automatiquement le thème de Noël en décembre
 local currentMonth = os.date("*t").month
+print("[DEBUG] Mois actuel détecté:", currentMonth)
 if currentMonth == 12 then
+    print("[DEBUG] Décembre détecté - Activation du thème de Noël")
     Library.SelectedTheme = "Christmas"
-end,
+else
+    print("[DEBUG] Nous ne sommes pas en décembre - Thème par défaut")
+end
 	SelectedTheme = "Default",
 	Folder = nil,
 	SaveCfg = false,
@@ -1853,7 +1857,11 @@ MakeResizable(ResizeBtn, MainWindow, Vector2.new(400, 250), Vector2.new(1200, 80
 	end  
 	
 	return TabFunction
-end   
+end
+
+-- Appliquer le thème après la création de la fenêtre
+print("[DEBUG] Application du thème dans MakeWindow:", Library.SelectedTheme)
+SetTheme()
 
 local Configs_HUB = {
   Cor_Hub = Color3.fromRGB(15, 15, 15),
