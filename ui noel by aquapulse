@@ -33,6 +33,12 @@ local Library = {
         Highlight = Color3.fromRGB(200, 0, 0)  -- Rouge vif
     }
 },
+
+-- Activer automatiquement le thème de Noël en décembre
+local currentMonth = os.date("*t").month
+if currentMonth == 12 then
+    Library.SelectedTheme = "Christmas"
+end,
 	SelectedTheme = "Default",
 	Folder = nil,
 	SaveCfg = false,
@@ -234,7 +240,6 @@ local function AddThemeObject(Object, Type)
 	Object[ReturnProperty(Object)] = Library.Themes[Library.SelectedTheme][Type]
 	return Object
 end    
-
 
 local function SetTheme()
 	for Name, Type in pairs(Library.ThemeObjects) do
