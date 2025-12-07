@@ -43,7 +43,9 @@ if currentMonth == 12 then
 else
     print("[DEBUG] Nous ne sommes pas en décembre - Thème par défaut")
 end
-	SelectedTheme = "Default",
+print("[DEBUG] Thème sélectionné après vérification du mois:", Library.SelectedTheme)
+SelectedTheme = "Default",
+print("[DEBUG] Thème après affectation de SelectedTheme:", Library.SelectedTheme)
 	Folder = nil,
 	SaveCfg = false,
 	Font = Enum.Font.Gotham
@@ -246,6 +248,14 @@ local function AddThemeObject(Object, Type)
 end    
 
 local function SetTheme()
+	print("[DEBUG] SetTheme() appelé avec le thème:", Library.SelectedTheme)
+	if not Library.Themes[Library.SelectedTheme] then
+		print("[ERREUR] Le thème", Library.SelectedTheme, "n'existe pas dans Library.Themes")
+		print("Thèmes disponibles:", table.concat(table.foreach(Library.Themes, print) or {}, ", "))
+		return
+	end
+	
+	print("[DEBUG] Application des couleurs du thème:", Library.SelectedTheme)
 	for Name, Type in pairs(Library.ThemeObjects) do
 		for _, Object in pairs(Type) do
 			Object[ReturnProperty(Object)] = Library.Themes[Library.SelectedTheme][Name]
